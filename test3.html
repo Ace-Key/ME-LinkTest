@@ -3,8 +3,8 @@
 	<head>
 		<title>ME-Link Experiment - SPA4</title>
 		<style>
-			body { margin: 0; background: rgb(128,241,255); }
-			canvas { width: 40%; height: 40%; background: rgb(128,241,255); }
+			body { margin: 0; background: rgb(128,241,255); overflow: hidden; }
+			canvas { width: 100%; height: 100%; background: rgb(128,241,255); }
 		</style>
 	</head>
 	<body>
@@ -14,7 +14,7 @@
 		<script>
 		
 			
-			var scene, camera, renderer, geometry, material, rect, container, container1, rect, rect1, canvas;
+			var scene, camera, renderer, geometry, material, material1, rect, container, container1, rect, rect1, canvas;
 	
 			
 			canvas = document.createElement( 'canvas' );
@@ -29,12 +29,15 @@
 				
 			  camera.position.y = 200;
 			  camera.position.x = 200;	
-			  camera.position.z = 5000;
+			  camera.position.z = 2000;
 			  
 				renderer = new THREE.WebGLRenderer();
+				//renderer.position.x = 200;
+				//renderer.position.y = 200;
 				renderer.setClearColor("rgb(128,241,255)" );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth/2, window.innerHeight / 2 );
+				
 				document.body.appendChild( renderer.domElement );
 				
 				renderer1 = new THREE.WebGLRenderer();
@@ -46,13 +49,14 @@
 				
 				geometry = new THREE.BoxGeometry( 80, 280, 180 );
 				material = new THREE.MeshBasicMaterial( { color: "rgb(7,85,97)", wireframe: true } );
+				material1 = new THREE.MeshBasicMaterial( { color: "rgb(7,85,97)", wireframe: true } );
 				
 				
 		
 			
 				//for loop of rectangles
 			
-					for ( var i = 0; i < 10; i ++ ) {
+					for ( var i = 0; i < 5; i ++ ) {
 					
 					//rectanglular cuboid
 					rect = new THREE.Mesh( geometry, material );
@@ -63,21 +67,21 @@
 					rect.rotation.y = 40;
 					rect.rotation.z = 20;
 
-					rect.scale.x = 1.5;
-					rect.scale.y = 5;
-					rect.scale.z = 2.5;
+					rect.scale.x = 2;
+					rect.scale.y = 5.5;
+					rect.scale.z = 3;
 					
-					rect1 = new THREE.Mesh( geometry, material );
+					rect1 = new THREE.Mesh( geometry, material1 );
 					rect1.position.x = 200*i;
 					rect1.position.y = 700*i;
 					rect1.position.z = 20*i;
 					
-					rect1.rotation.y = -40;
-					rect1.rotation.z = -20;
+					rect1.rotation.y = 40;
+					rect1.rotation.z = 20;
 
-					rect1.scale.x = 1.5;
-					rect1.scale.y = 5;
-					rect1.scale.z = 2.5;
+					rect1.scale.x = 2;
+					rect1.scale.y = 5.5;
+					rect1.scale.z = 3;
 					
 					//object 
 					container.add( rect );
@@ -93,7 +97,7 @@
 					
 					container1.rotation.y = -50;
 					container1.rotation.z = -70;
-					container1.rotation.x = 20;
+					container1.rotation.x = -20;
 					
 					container1.position.x = 5;
 					container1.position.y = 10;
@@ -108,12 +112,12 @@
 				
 				
 					var render = function () {
-					container.rotation.x += 0.01;
+					container.rotation.x += 0.03;
 					container.rotation.y += 0.00;
 					container.rotation.z += 0.05;
-					container1.rotation.x -= 0.01;
-					container1.rotation.y -= 0.00;
-					container1.rotation.z -= 0.05;
+					container1.rotation.x += 0.03;
+					container1.rotation.y += 0.00;
+					container1.rotation.z += 0.05;
 					requestAnimationFrame( render );
 					renderer.render(scene, camera);
 					renderer1.render(scene, camera);
